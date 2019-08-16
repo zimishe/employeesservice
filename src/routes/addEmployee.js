@@ -1,10 +1,9 @@
 const uuidv1 = require('uuid/v1');
-const axios = require('axios')
-const { dbName } = require('../_config/db');
+const { dbName } = require('../config/db');
+const { TARGET_COLLECTION } = require('../constants');
+const { checkToken } = require('../utils/authorization');
 
-const TARGET_COLLECTION = 'employees'
-const ENDPOINT_URL = '/employees'
-const AUTHORIZATION_SERVICE_URL = 'https://authservice00.herokuapp.com/auth'
+const ENDPOINT_URL = '/employees';
 
 module.exports = (app, client) => {
 	app.post(ENDPOINT_URL, async (req, res) => {
@@ -13,13 +12,7 @@ module.exports = (app, client) => {
 		const db = client.db(dbName);
 
 		try {
-			const { status } = await axios({
-				method: 'post',
-				url: AUTHORIZATION_SERVICE_URL,
-				data: {
-					token
-				}
-			});
+			const { status } = await checkToken(token)
 
 			if (status === 200) {
 				db.collection(TARGET_COLLECTION)

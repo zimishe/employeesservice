@@ -1,7 +1,7 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
-const { URL } = require('./_config/db');
+const { URL } = require('./config/db');
 const port = process.env.PORT || 8000;
 
 const app = express();

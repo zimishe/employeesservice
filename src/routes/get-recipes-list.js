@@ -1,4 +1,4 @@
-const { dbName } = require('./../_config/db');
+const { dbName } = require('../config/db');
 
 module.exports = (app, client) => {
 	app.get('/recipes', (req, res) => {
