@@ -1,9 +1,6 @@
-const axios = require('axios');
 const { dbName } = require('../config/db');
-const {	TARGET_COLLECTION } = require('../constants');
+const {	TARGET_COLLECTION, ENDPOINT_URL } = require('../constants');
 const { checkToken } = require('../utils/authorization');
-
-const ENDPOINT_URL = '/employees';
 
 module.exports = (app, client) => {
 	app.put(ENDPOINT_URL, async (req, mainResult) => {

@@ -1,7 +1,9 @@
-const TARGET_COLLECTION = 'employees'
-const AUTHORIZATION_SERVICE_URL = 'https://authservice00.herokuapp.com/auth'
+const TARGET_COLLECTION = 'employees';
+const AUTHORIZATION_SERVICE_URL = 'https://authservice00.herokuapp.com/auth';
+const ENDPOINT_URL = '/employees';
 
 module.exports = {
   TARGET_COLLECTION,
-  AUTHORIZATION_SERVICE_URL
+  AUTHORIZATION_SERVICE_URL,
+  ENDPOINT_URL
 }
