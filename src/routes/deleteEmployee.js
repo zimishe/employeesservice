@@ -3,9 +3,9 @@ const {	TARGET_COLLECTION, ENDPOINT_URL } = require('../constants');
 const { checkToken } = require('../utils/authorization');
 
 module.exports = (app, client) => {
-	app.put(ENDPOINT_URL, async (req, mainResult) => {
+	app.delete(ENDPOINT_URL, async (req, mainResult) => {
 		const token = req.get('Authorization');
-		const { id, ...employee } = req.body;
+		const { id } = req.body;
 
 		const db = client.db(dbName);
 
@@ -18,12 +18,11 @@ module.exports = (app, client) => {
 						mainResult.send(error);
 					} else {
 						Boolean(result)
-							? updateEmployee({
-								db,
-								filter: result,
-								mainResult,
-								employee: { ...result, ...employee }
-							})
+							? deleteEmployee({
+									db,
+									filter: result,
+									mainResult
+								})
 							: mainResult.sendStatus(404)
 					}
 				});
@@ -35,11 +34,9 @@ module.exports = (app, client) => {
 	})
 }
 
-function updateEmployee({ db, filter, mainResult, employee }) {
+function deleteEmployee({ db, filter, mainResult }) {
 	db.collection(TARGET_COLLECTION)
-		.updateOne(filter, {
-			$set: employee
-		}, error => {
+		.deleteOne(filter, error => {
 			if (error) {
 				mainResult.send({ error });
 			} else {

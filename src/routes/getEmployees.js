@@ -17,7 +17,7 @@ module.exports = (app, client) => {
 						if (error) {
 							res.send({ error });
 						} else {
-							res.send(result);
+							Boolean(result) ? res.send(result) : res.sendStatus(404)
 						}
 				});
 			}
