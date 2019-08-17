@@ -18,7 +18,7 @@ module.exports = (app, client) => {
 						if (error) {
 							res.send({ error });
 						} else {
-							res.sendStatus(200);
+							res.send({ employee });
 						}
 				});
 			}
