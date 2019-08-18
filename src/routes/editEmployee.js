@@ -19,11 +19,11 @@ module.exports = (app, client) => {
 					} else {
 						Boolean(result)
 							? updateEmployee({
-								db,
-								filter: result,
-								mainResult,
-								employee: { ...result, ...employee }
-							})
+									db,
+									filter: result,
+									mainResult,
+									employee: { ...result, ...employee }
+								})
 							: mainResult.sendStatus(404)
 					}
 				});
@@ -43,7 +43,7 @@ function updateEmployee({ db, filter, mainResult, employee }) {
 			if (error) {
 				mainResult.send({ error });
 			} else {
-				mainResult.sendStatus(200);
+				mainResult.send({ employee });
 			}
 	});
 }
