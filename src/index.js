@@ -1,8 +1,11 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
-const { URL } = require('./config/db');
-const port = process.env.PORT || 8000;
+const dotenv = require('dotenv');
+dotenv.config();
+
+const { DB_URL, PORT } = process.env;
+const port = PORT || 8000;
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,7 +17,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-MongoClient.connect(URL,
+MongoClient.connect(DB_URL,
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true

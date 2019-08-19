@@ -1,13 +1,16 @@
 const uuidv1 = require('uuid/v1');
-const { dbName } = require('../config/db');
 const { TARGET_COLLECTION, ENDPOINT_URL } = require('../constants');
 const { checkToken } = require('../utils/authorization');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const { DB_NAME } = process.env;
 
 module.exports = (app, client) => {
 	app.post(ENDPOINT_URL, async (req, res) => {
 		const employee = { ...req.body, id: uuidv1() };
 		const token = req.get('Authorization');
-		const db = client.db(dbName);
+		const db = client.db(DB_NAME);
 
 		try {
 			const { status } = await checkToken(token)

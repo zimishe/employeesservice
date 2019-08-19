@@ -1,13 +1,17 @@
-const { dbName } = require('../config/db');
 const {	TARGET_COLLECTION, ENDPOINT_URL } = require('../constants');
 const { checkToken } = require('../utils/authorization');
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const { DB_NAME } = process.env;
 
 module.exports = (app, client) => {
 	app.put(ENDPOINT_URL, async (req, mainResult) => {
 		const token = req.get('Authorization');
 		const { id, ...employee } = req.body;
 
-		const db = client.db(dbName);
+		const db = client.db(DB_NAME);
 
 		try {
 			const { status } = await checkToken(token)
