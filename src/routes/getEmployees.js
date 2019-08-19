@@ -17,6 +17,7 @@ module.exports = (app, client) => {
 						res.send({ error });
 					} else {
 						Boolean(result) ? res.send(result) : res.sendStatus(404)
+						// check if such record is present, if not, respond with 404
 					}
 			});
 		} catch (error) {

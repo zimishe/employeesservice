@@ -2,7 +2,7 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config(); // getting environment variables
 
 const { DB_URL, PORT } = process.env;
 const port = PORT || 8000;

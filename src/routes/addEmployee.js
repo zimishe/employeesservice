@@ -8,8 +8,8 @@ const { DB_NAME } = process.env;
 
 module.exports = (app, client) => {
 	app.post(ENDPOINT_URL, async (req, res) => {
-		const employee = { ...req.body, id: uuidv1() };
-		const token = req.get('Authorization');
+		const employee = { ...req.body, id: uuidv1() }; // adding id to simplify searching item
+		const token = req.get('Authorization'); // get Authorization header
 		const db = client.db(DB_NAME);
 
 		try {
@@ -21,7 +21,7 @@ module.exports = (app, client) => {
 						if (error) {
 							res.send({ error });
 						} else {
-							res.send({ employee });
+							res.send({ employee }); // responding with created entity
 						}
 				});
 			}

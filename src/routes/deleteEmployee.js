@@ -27,6 +27,7 @@ module.exports = (app, client) => {
 									mainResult
 								})
 							: mainResult.sendStatus(404)
+						// check if such record is present, if not, respond with 404
 					}
 				});
 			}
